@@ -1,7 +1,8 @@
-before:
+before_script:
   - apt-get update -qq && apt-get install -y nodejs
   - node -v
   - npm i
 
 build:
-  - node index.js
+  script:
+    - node index.js
