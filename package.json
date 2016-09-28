@@ -1,0 +1,16 @@
+{
+  "name": "chalk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "highlight.js": "^9.7.0",
+    "markdown-it": "^8.0.0"
+  }
+}
