@@ -75,7 +75,6 @@ function formatPage (data) {
           }
           ${data.body}
         </div>
-        <script src="http://livejs.com/live.js"></script>
       </body>
     </html>
   `
