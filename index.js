@@ -14,7 +14,7 @@ const md = require('markdown-it')({
 })
 
 const mdDir = './posts'
-const wwwDir = './www'
+const wwwDir = './docs'
 
 const files = fs.readdirSync(mdDir).reverse()
 
