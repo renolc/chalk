@@ -25,4 +25,56 @@ body {
   padding: 50px;
   background: white;
   box-sizing: border-box;
+  position: relative;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid #bebebe;
+  padding: 10px 30px;
+  border-radius: 130288px;
+  color: black;
+  font-weight: bold;
+  border-bottom-color: #999;
+  border-right-color: #999;
+  margin-top: -30px;
+  position: absolute;
+}
+
+.btn:hover {
+  background: #efefef;
+}
+
+.left {
+  left: 30px;
+}
+
+.right {
+  right: 30px;
+}
+
+@media only screen and (max-width: 500px) {
+  .content {
+    padding: 50px 25px;
+  }
+
+  .btn {
+    /*margin-top: 0;*/
+    text-align: center;
+    display: inline-block;
+    width: 45vw;
+    box-sizing: border-box;
+  }
+
+  .left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    left: 5vw;
+  }
+
+  .right {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    right: 5vw;
+  }
 }

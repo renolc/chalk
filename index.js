@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const hljs = require('highlight.js')
+const get = require('obj-get')
 const md = require('markdown-it')({
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
@@ -35,11 +36,19 @@ function genMetaData (file, index) {
   }
 
   if (index < files.length - 1) {
-    data.prev = `/posts/${getDate(files[index+1])}.html`
+    const prevDate = getDate(files[index+1])
+    data.prev = {
+      date: prevDate,
+      url: `/posts/${prevDate}.html` 
+    }
   }
 
   if (index > 0 ) {
-    data.next = (index === 1) ? '/' : `/posts/${getDate(files[index-1])}.html`
+    const nextDate = getDate(files[index-1])
+    data.next = {
+      date: nextDate,
+      url: (index === 1) ? '/' : `/posts/${nextDate}.html`
+    }
   }
 
   return data
@@ -54,15 +63,15 @@ function formatPage (data) {
     <!doctype html>
     <html>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/style.css">
         <title>Title - ${data.date}</title>
       </head>
       <body>
         <div class="content">
           ${
-            renderIf(data.prev, `<a href="${data.prev}">prev</a>`) +
-            renderIf(data.prev && data.next, ' - ') +
-            renderIf(data.next, `<a href="${data.next}">next</a>`)
+            renderIf(data.prev, `<a class="btn left" href="${get(data.prev, 'url')}">&leftarrow; ${get(data.prev, 'date')}</a>`) +
+            renderIf(data.next, `<a class="btn right" href="${get(data.next, 'url')}">${get(data.next, 'date')} &rightarrow;</a>`)
           }
           ${data.body}
         </div>
