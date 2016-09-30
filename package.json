@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "init": "cp ./scripts/pre-commit .git/hooks/",
+    "gen": "node ./scripts/gen.js",
+    "new": "touch ./posts/`date +%Y-%m-%d`.md; open ./posts/`date +%Y-%m-%d`.md",
+    "commit": "git add .; git commit -m 'Adding new post'"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,3 @@
+#!/bin/bash
+node ./scripts/gen.js
+git add .
