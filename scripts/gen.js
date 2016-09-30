@@ -39,7 +39,7 @@ function genMetaData (file, index) {
     const prevDate = getDate(files[index+1])
     data.prev = {
       date: prevDate,
-      url: `/posts/${prevDate}.html` 
+      url: `/posts/${prevDate}.html`
     }
   }
 
@@ -65,7 +65,7 @@ function formatPage (data) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./style.css">
-        <title>Title - ${data.date}</title>
+        <title>Chalk - ${data.date}</title>
       </head>
       <body>
         <div class="content">
