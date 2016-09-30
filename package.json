@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "init": "npm i; git init; cp ./scripts/pre-commit .git/hooks/",
+    "init": "mkdir ./posts ./docs/posts; npm i; git init; cp ./scripts/pre-commit .git/hooks/",
     "gen": "node ./scripts/gen.js",
     "new": "touch ./posts/`date +%Y-%m-%d`.md; open ./posts/`date +%Y-%m-%d`.md",
     "post": "git add .; git commit -m 'Adding new post'; git push origin master"
