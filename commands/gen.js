@@ -34,6 +34,7 @@ function getDate (file) {
 function genMetaData (file, index) {
   const date = getDate(file)
   const data = {
+    isIndex: (index === 0),
     date: date,
     body: md.render(fs.readFileSync(path.resolve(mdDir, file), { encoding: 'utf8' })),
     path: (index === 0) ? path.resolve(wwwDir, 'index.html') : path.resolve(postsDir, `${date}.html`)
@@ -63,12 +64,14 @@ function renderIf(cond, render) {
 }
 
 function formatPage (data) {
+  const stylePath = data.isIndex ? './style.css' : '../style.css'
+
   return `
     <!doctype html>
     <html>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="${stylePath}">
         <title>${data.date}</title>
       </head>
       <body>
