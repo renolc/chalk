@@ -44,7 +44,7 @@ function genMetaData (file, index) {
     const prevDate = getDate(files[index+1])
     data.prev = {
       date: prevDate,
-      url: `/posts/${prevDate}.html`
+      url: `/posts/${prevDate}`
     }
   }
 
@@ -52,7 +52,7 @@ function genMetaData (file, index) {
     const nextDate = getDate(files[index-1])
     data.next = {
       date: nextDate,
-      url: (index === 1) ? '/' : `/posts/${nextDate}.html`
+      url: (index === 1) ? '/' : `/posts/${nextDate}`
     }
   }
 
