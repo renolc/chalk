@@ -15,6 +15,10 @@
   transition: 200ms all;
 }
 
+a {
+  color: #69c;
+}
+
 body {
   font-family: sans-serif;
   color: #333;
