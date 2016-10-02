@@ -1,17 +1,18 @@
 {
-  "name": "chalk",
+  "name": "chalk-blog",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "init": "mkdir ./posts ./docs/posts; npm i; git init; cp ./scripts/pre-commit .git/hooks/",
-    "gen": "node ./scripts/gen.js",
-    "new": "touch ./posts/`date +%Y-%m-%d`.md; open ./posts/`date +%Y-%m-%d`.md",
-    "post": "git add .; git commit -m 'Adding new post'; git push origin master"
+  "description": "Simple blogging using GitHub",
+  "bin": {
+    "chalk": "./index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "blog",
+    "markdown",
+    "github",
+    "pages"
+  ],
+  "author": "Phillip Gibson <gibson.phillip.j@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "highlight.js": "^9.7.0",
     "markdown-it": "^8.0.0",

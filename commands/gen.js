@@ -13,8 +13,12 @@ const md = require('markdown-it')({
   }
 })
 
-const mdDir = './posts'
-const wwwDir = './docs'
+const mdDir = './mds'
+const wwwDir = './'
+const postsDir = path.resolve(wwwDir, 'posts')
+
+if (!fs.existsSync(mdDir)) return
+if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir)
 
 const files = fs.readdirSync(mdDir).reverse()
 
@@ -32,7 +36,7 @@ function genMetaData (file, index) {
   const data = {
     date: date,
     body: md.render(fs.readFileSync(path.resolve(mdDir, file), { encoding: 'utf8' })),
-    path: (index === 0) ? path.resolve(wwwDir, 'index.html') : path.resolve(wwwDir, 'posts', `${date}.html`)
+    path: (index === 0) ? path.resolve(wwwDir, 'index.html') : path.resolve(postsDir, `${date}.html`)
   }
 
   if (index < files.length - 1) {
@@ -65,7 +69,7 @@ function formatPage (data) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./style.css">
-        <title>Chalk - ${data.date}</title>
+        <title>${data.date}</title>
       </head>
       <body>
         <div class="content">
