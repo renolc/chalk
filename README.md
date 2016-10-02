@@ -2,6 +2,11 @@
 
 A simple CLI to create a GitHub Pages hosted blog
 
+### Example
+
+- [Live Example](https://renolc.github.io)
+- [Source Repo](https://github.com/renolc/renolc.github.io)
+
 ### Installation
 
 ```bash
