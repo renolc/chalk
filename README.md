@@ -1,4 +1,4 @@
-# chalk-blog
+# chalk-blog [![npm version](https://badge.fury.io/js/chalk-blog.svg)](https://badge.fury.io/js/chalk-blog)
 
 A simple CLI to create a GitHub Pages hosted blog
 
