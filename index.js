@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require('fs')
 const log = console.log
 
 const cmd = process.argv[2]
@@ -21,7 +22,11 @@ switch (cmd) {
     break
 
   default:
+    const version = JSON.parse(fs.readFileSync('./package.json', { encoding: 'utf8' })).version
+
     log(`
+  v${version}
+
   Usage: chalk <command>
 
   Commands:
