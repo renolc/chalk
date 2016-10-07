@@ -1,6 +1,4 @@
 module.exports = (githubRepo) => {
-  if (!githubRepo) return console.log('\n  Usage: chalk init <githubRepo>\n')
-
   const fs = require('fs')
   const path = require('path')
   const log = console.log
