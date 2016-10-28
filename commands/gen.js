@@ -14,6 +14,8 @@ module.exports = () => {
     }
   })
 
+  const exec = require('../exec-promise')
+
   const mdDir = './mds'
   const wwwDir = './'
   const postsDir = path.resolve(wwwDir, 'posts')
@@ -32,12 +34,43 @@ module.exports = () => {
     return file.split('.')[0]
   }
 
+  function moveImages (mdPath, markdown, isIndex) {
+    const images = /<img.*src=['"](.*?)['"].*>/g
+    var res
+    var mdCopy = markdown
+
+    while ((res = images.exec(markdown)) !== null) {
+      if (!fs.existsSync('./images')) fs.mkdirSync('./images')
+
+      const oldPath = res[1]
+      const imageName = path.basename(oldPath)
+      const relativePath = isIndex ? './images' : '../images'
+
+      if (oldPath.startsWith(relativePath)) continue
+
+      const newPath = `${relativePath}/${imageName}`
+
+      if (!oldPath.startsWith('./images') && !oldPath.startsWith('../images'))
+        exec(`cp ${oldPath} ${newPath}`)()
+
+      mdCopy = mdCopy.split(oldPath).join(newPath)
+    }
+
+    fs.writeFileSync(mdPath, mdCopy)
+
+    return mdCopy
+  }
+
   function genMetaData (file, index) {
+    const mdPath = path.resolve(mdDir, file)
+    var markdown = fs.readFileSync(mdPath, { encoding: 'utf8' })
+    markdown = moveImages(mdPath, markdown, index === 0)
+
     const date = getDate(file)
     const data = {
       isIndex: (index === 0),
       date: date,
-      body: md.render(fs.readFileSync(path.resolve(mdDir, file), { encoding: 'utf8' })),
+      body: markdown,
       path: (index === 0) ? path.resolve(wwwDir, 'index.html') : path.resolve(postsDir, `${date}.html`)
     }
 
