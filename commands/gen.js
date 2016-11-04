@@ -70,7 +70,7 @@ module.exports = () => {
     const data = {
       isIndex: (index === 0),
       date: date,
-      body: markdown,
+      body: md.render(markdown),
       path: (index === 0) ? path.resolve(wwwDir, 'index.html') : path.resolve(postsDir, `${date}.html`)
     }
 
