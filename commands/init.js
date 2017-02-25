@@ -1,30 +1,27 @@
-module.exports = (githubRepo) => {
-  const fs = require('fs')
-  const path = require('path')
-  const log = console.log
+const path = require('path')
+const log = console.log
 
-  const exec = require('../exec-promise')
-  const p = require('../generic-promise')
+const { git, cp } = require('cmd-executor')
 
-  const chalkPath = path.resolve(__dirname, '..')
+const chalkPath = path.resolve(__dirname, '..')
 
-  exec('git init', 'Initializing git repo...')()
+module.exports = async (githubRepo) => {
+  try {
+    log('Initializing git repo...')
+    await git.init()
 
-    .then(exec('touch .git/hooks/pre-commit', 'Setting up pre-commit hook...'))
-    .then(p(() => {
-      fs.writeFileSync('.git/hooks/pre-commit', `#!/bin/bash
-      chalk gen
-      git add .`)
-    }))
-    .then(exec('chmod +x .git/hooks/pre-commit'))
+    log('Adding git remote origin...')
+    await git.remote.add('origin', githubRepo)
 
-    .then(exec(`git remote add origin ${githubRepo}`, 'Adding git remote origin...'))
+    log('Copying CSS template...')
+    await cp(`${chalkPath}/docs/style.css`, './')
 
-    .then(exec(`cp ${chalkPath}/docs/style.css ./`, 'Copying CSS template...'))
+    log('Making initial git commit...')
+    await git.add('.')
+    await git.commit('-m "New chalk blog created"')
 
-    .then(exec('git add .', 'Making initial git commit...'))
-    .then(exec('git commit -m "New chalk blog created"'))
-    
-    .then(() => log('Done!'))
-    .catch((e) => console.error(e))
+    log('Done!')
+  } catch (e) {
+    log(e)
+  }
 }

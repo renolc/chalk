@@ -1,11 +1,11 @@
-module.exports = () => {
-  const fs = require('fs')
-  const path = require('path')
+const fs = require('fs')
+const path = require('path')
 
-  const exec = require('../exec-promise')
+const { touch, open } = require('cmd-executor')
 
-  const mdDir = './mds'
+const mdDir = './mds'
 
+module.exports = async () => {
   if (!fs.existsSync(mdDir)) fs.mkdirSync(mdDir)
 
   const today = new Date()
@@ -17,6 +17,6 @@ module.exports = () => {
 
   const filePath = path.resolve(mdDir, name)
 
-  exec(`touch ${filePath}`)()
-    .then((exec(`open ${filePath}`)))
+  await touch(filePath)
+  await open(filePath)
 }

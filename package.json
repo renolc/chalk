@@ -5,6 +5,9 @@
   "bin": {
     "chalk": "./index.js"
   },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
   "keywords": [
     "blog",
     "markdown",
@@ -14,6 +17,7 @@
   "author": "Phillip Gibson <gibson.phillip.j@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "cmd-executor": "^1.1.0",
     "ezcli": "^1.0.0",
     "highlight.js": "^9.7.0",
     "markdown-it": "^8.0.0",

@@ -1,25 +1,25 @@
-module.exports = () => {
-  const fs = require('fs')
-  const path = require('path')
-  const hljs = require('highlight.js')
-  const get = require('obj-get')
-  const md = require('markdown-it')({
-    highlight: (str, lang) => {
-      if (lang && hljs.getLanguage(lang)) {
-        try { return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>` }
-        catch (_) {}
-      }
-
-      return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`
+const fs = require('fs')
+const path = require('path')
+const hljs = require('highlight.js')
+const get = require('obj-get')
+const md = require('markdown-it')({
+  highlight: (str, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      try { return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>` }
+      catch (_) {}
     }
-  })
 
-  const exec = require('../exec-promise')
+    return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`
+  }
+})
 
-  const mdDir = './mds'
-  const wwwDir = './'
-  const postsDir = path.resolve(wwwDir, 'posts')
+const { cp } = require('cmd-executor')
 
+const mdDir = './mds'
+const wwwDir = './'
+const postsDir = path.resolve(wwwDir, 'posts')
+
+module.exports = async () => {
   if (!fs.existsSync(mdDir)) return
   if (!fs.existsSync(postsDir)) fs.mkdirSync(postsDir)
 
@@ -51,7 +51,7 @@ module.exports = () => {
       const newPath = `${relativePath}/${imageName}`
 
       if (!oldPath.startsWith('./images') && !oldPath.startsWith('../images'))
-        exec(`cp ${oldPath} ${newPath}`)()
+        cp(oldPath, newPath)
 
       mdCopy = mdCopy.split(oldPath).join(newPath)
     }
