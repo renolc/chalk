@@ -5,16 +5,16 @@ const { git, cp } = require('cmd-executor')
 
 const chalkPath = path.resolve(__dirname, '..')
 
-module.exports = async (githubRepo) => {
+module.exports = async (gitRepo) => {
   try {
     log('Initializing git repo...')
     await git.init()
 
     log('Adding git remote origin...')
-    await git.remote.add('origin', githubRepo)
+    await git.remote.add('origin', gitRepo)
 
-    log('Copying CSS template...')
-    await cp(`${chalkPath}/docs/style.css`, './')
+    log('Copying documents...')
+    await cp(`-r ${chalkPath}/docs/*`, './')
 
     log('Making initial git commit...')
     await git.add('.')
@@ -22,6 +22,6 @@ module.exports = async (githubRepo) => {
 
     log('Done!')
   } catch (e) {
-    log(e)
+    log(e.toString())
   }
 }
