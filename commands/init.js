@@ -15,7 +15,7 @@ module.exports = async (repoUrl) => {
     await git.add('.')
     await git.commit('-m "New chalk blog created"')
 
-    log('done!')
+    log('Done!')
   } catch (e) {
     log(e.toString())
   }
