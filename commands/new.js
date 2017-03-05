@@ -1,22 +1,17 @@
-const fs = require('fs')
 const path = require('path')
+const { writeFileSync } = require('fs')
+const { touch, echo, open } = require('cmd-executor')
 
-const { touch, open } = require('cmd-executor')
+const appendToOrder = require('../utils/append-to-order')
+const { mdDir } = require('../utils/consts')
 
-const mdDir = './mds'
+module.exports = async (...name) => {
+  const fileName = `${name.map((i) => i.replace(/\W/g, '').toLowerCase()).join('-')}.md`
+  const filePath = path.resolve(mdDir, fileName)
 
-module.exports = async () => {
-  if (!fs.existsSync(mdDir)) fs.mkdirSync(mdDir)
-
-  const today = new Date()
-  today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
-
-  const date = today.toISOString().substring(0, 10)
-  const count = fs.readdirSync('./mds').filter((item) => item.includes(date)).length
-  const name = (count) ? `${date}${String.fromCharCode(97+count)}.md` : `${date}.md`
-
-  const filePath = path.resolve(mdDir, name)
+  appendToOrder(fileName)
 
   await touch(filePath)
+  await echo(`"# ${name.join(' ')}"`, '>', filePath)
   await open(filePath)
 }

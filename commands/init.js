@@ -1,26 +1,21 @@
 const path = require('path')
+const { mkdir, git, cp } = require('cmd-executor')
+
+const { chalkPath } = require('../utils/consts')
+
 const log = console.log
 
-const { git, cp } = require('cmd-executor')
-
-const chalkPath = path.resolve(__dirname, '..')
-
-module.exports = async (gitRepo) => {
+module.exports = async (repoUrl) => {
   try {
-    log('Initializing git repo...')
     await git.init()
-
-    log('Adding git remote origin...')
-    await git.remote.add('origin', gitRepo)
-
-    log('Copying documents...')
+    await git.remote.add('origin', repoUrl)
+    
     await cp(`-r ${chalkPath}/docs/*`, './')
 
-    log('Making initial git commit...')
     await git.add('.')
     await git.commit('-m "New chalk blog created"')
 
-    log('Done!')
+    log('done!')
   } catch (e) {
     log(e.toString())
   }
