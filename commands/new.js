@@ -13,5 +13,6 @@ module.exports = async (...name) => {
 
   await touch(filePath)
   await echo(`"# ${name.join(' ')}"`, '>', filePath)
+  await echo(`"## ${new Date().toDateString()}"`, '>>', filePath)
   await open(filePath)
 }

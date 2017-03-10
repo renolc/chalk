@@ -36,14 +36,20 @@ body {
   color: #333;
 }
 
-.item h3,
+.item h3 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.item h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: gray;
+}
+
 .item p {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-.item:hover {
-  box-shadow: inset 1px 1px 5px gray;
 }
 
 .content {
@@ -96,11 +102,13 @@ body {
 
 @media only screen and (max-width: 500px) {
   .content {
-    padding: 50px 25px;
+    padding: 20px 50px 25px;
   }
 
   .btn {
     text-align: center;
     max-width: unset;
+    width: 100%;
+    margin-top: 30px;
   }
 }

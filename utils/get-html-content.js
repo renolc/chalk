@@ -1,0 +1,1 @@
+module.exports = (body, tag) => body.substring(body.indexOf(`<${tag}>`) + tag.length + 2, body.indexOf(`</${tag}>`))

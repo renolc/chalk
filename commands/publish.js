@@ -5,6 +5,7 @@ const md = require('../utils/md-with-highlight')
 const readOrder = require('../utils/read-order')
 const writeHtmlFile = require('../utils/write-html-file')
 const insertHtmlData = require('../utils/insert-html-data')
+const getHtmlContent = require ('../utils/get-html-content')
 const {
   mdDir,
   postsDir,
@@ -20,12 +21,14 @@ const log = console.log
 module.exports = async () => {
   const posts = readOrder().map((mdFile, i) => {
     const body = md.render(readFileSync(`${mdDir}/${mdFile}`, 'utf8'))
-    const title = body.substring(body.indexOf('<h1>') + 4, body.indexOf('</h1>'))
-    const firstP = body.substring(body.indexOf('<p>') + 3, body.indexOf('</p>'))
+    const title = getHtmlContent(body, 'h1')
+    const date = getHtmlContent(body, 'h2')
+    const firstP = getHtmlContent(body, 'p')
 
     return {
       fileName: mdFile.split('.')[0],
       title,
+      date,
       firstP,
       body
     }
@@ -42,6 +45,7 @@ module.exports = async () => {
     return insertHtmlData(itemTemplatePath, {
       fileName: post.fileName,
       title: post.title,
+      date: post.date,
       firstP: post.firstP
     })
   }).reverse().join('\n')
