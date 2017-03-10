@@ -6,6 +6,7 @@ const readOrder = require('../utils/read-order')
 const writeHtmlFile = require('../utils/write-html-file')
 const insertHtmlData = require('../utils/insert-html-data')
 const getHtmlContent = require ('../utils/get-html-content')
+const updateRss = require('../utils/update-rss')
 const {
   mdDir,
   postsDir,
@@ -51,6 +52,8 @@ module.exports = async () => {
   }).reverse().join('\n')
 
   writeHtmlFile('./index.html', indexTemplatePath, { items })
+
+  updateRss(posts)
 
   try {
     await git.add('.')
