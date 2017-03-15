@@ -1,4 +1,3 @@
-const path = require('path')
 const { writeFileSync } = require('fs')
 const { touch, echo, open } = require('cmd-executor')
 
@@ -7,7 +6,7 @@ const { mdDir } = require('../utils/consts')
 
 module.exports = async (...name) => {
   const fileName = `${name.map((i) => i.replace(/\W/g, '').toLowerCase()).join('-')}.md`
-  const filePath = path.resolve(mdDir, fileName)
+  const filePath = `${mdDir}/${fileName}`
 
   appendToOrder(fileName)
 
