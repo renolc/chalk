@@ -14,4 +14,5 @@ module.exports = {
 
   mdDir: './meta/mds',
   postsDir: './posts',
+  pageDir: './page'
 }

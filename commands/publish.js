@@ -2,29 +2,15 @@ const { git } = require('cmd-executor')
 
 const getPostsData = require('../utils/get-posts-data')
 const writePosts = require('../utils/write-posts')
-const writeHtmlFile = require('../utils/write-html-file')
-const insertHtmlData = require('../utils/insert-html-data')
+const writeIndex = require('../utils/write-index')
 const updateRss = require('../utils/update-rss')
-const {
-  indexTemplatePath,
-  itemTemplatePath
-} = require('../utils/consts')
 
 const log = console.log
 
 module.exports = async () => {
   const posts = getPostsData()
   writePosts(posts)
-
-  const items = posts.map((post, i) => insertHtmlData(itemTemplatePath, {
-    fileName: post.fileName,
-    title: post.title,
-    date: post.date,
-    firstP: post.firstP
-  })).reverse().join('\n')
-
-  writeHtmlFile('./index.html', indexTemplatePath, { items })
-
+  writeIndex(posts)
   updateRss(posts)
 
   try {
