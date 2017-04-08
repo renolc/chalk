@@ -1,5 +1,5 @@
 const hljs = require('highlight.js')
-module.exports = require('markdown-it')({
+const md = require('markdown-it')({
   html: true,
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
@@ -10,3 +10,4 @@ module.exports = require('markdown-it')({
     return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`
   }
 })
+module.exports = md

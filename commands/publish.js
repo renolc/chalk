@@ -14,6 +14,7 @@ module.exports = async () => {
   updateRss(posts)
 
   try {
+    await git.pull()
     await git.add('.')
     const status = await git.status()
     if (!status.includes('nothing to commit')) {
