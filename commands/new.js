@@ -4,8 +4,8 @@ const appendToOrder = require('../utils/append-to-order')
 const { mdDir } = require('../utils/consts')
 
 module.exports = async (...name) => {
-  const fileName = `${name.map((i) => i.replace(/\W/g, '').toLowerCase()).join('-')}.md`
-  const filePath = `${mdDir}/${fileName}`
+  const fileName = `${name.map((i) => i.replace(/\W/g, '').toLowerCase()).join('-')}`
+  const filePath = `${mdDir}/${fileName}.md`
 
   appendToOrder(fileName)
 

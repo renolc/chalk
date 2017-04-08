@@ -5,14 +5,14 @@ const readOrder = require('./read-order')
 const getHtmlContent = require ('./get-html-content')
 const { mdDir } = require('./consts')
 
-module.exports = () => readOrder().map((mdFile, i) => {
-  const body = md.render(readFileSync(`${mdDir}/${mdFile}`, 'utf8'))
+module.exports = () => readOrder().map((fileName, i) => {
+  const body = md.render(readFileSync(`${mdDir}/${fileName}.md`, 'utf8'))
   const title = getHtmlContent(body, 'h1')
   const date = getHtmlContent(body, 'h2')
   const firstP = getHtmlContent(body, 'p')
 
   return {
-    fileName: mdFile.split('.')[0],
+    fileName,
     title,
     date,
     firstP,
