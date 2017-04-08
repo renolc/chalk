@@ -1,5 +1,4 @@
-const path = require('path')
-const { mkdir, git, cp } = require('cmd-executor')
+const { git, cp } = require('cmd-executor')
 
 const { chalkPath } = require('../utils/consts')
 

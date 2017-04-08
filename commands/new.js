@@ -1,4 +1,3 @@
-const { writeFileSync } = require('fs')
 const { touch, echo, open } = require('cmd-executor')
 
 const appendToOrder = require('../utils/append-to-order')
