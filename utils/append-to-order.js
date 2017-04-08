@@ -1,4 +1,6 @@
-const readOrder = require('./read-order')
-const writeOrder = require('./write-order')
+const { writeFileSync } = require('fs')
 
-module.exports = (fileName) => writeOrder(readOrder().concat(fileName))
+const readOrder = require('./read-order')
+const { orderPath } = require('./consts')
+
+module.exports = (fileName) => writeFileSync(orderPath, JSON.stringify(readOrder().concat(fileName)))
