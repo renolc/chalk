@@ -8,13 +8,13 @@ const updateRss = require('../utils/update-rss')
 const log = console.log
 
 module.exports = async () => {
+  await git.pull()
   const posts = getPostsData()
   writePosts(posts)
   writeIndex(posts)
   updateRss(posts)
 
   try {
-    await git.pull()
     await git.add('.')
     const status = await git.status()
     if (!status.includes('nothing to commit')) {
