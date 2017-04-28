@@ -1,6 +1,6 @@
 {
   "name": "chalk-blog",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Simple blogging using GitHub",
   "bin": {
     "chalk": "./index.js"
