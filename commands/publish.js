@@ -9,6 +9,7 @@ const log = console.log
 
 module.exports = async () => {
   await git.pull()
+
   const posts = getPostsData()
   writePosts(posts)
   writeIndex(posts)
