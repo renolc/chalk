@@ -7,11 +7,11 @@ const {
   nextTemplatePath
 } = require('./consts')
 
-module.exports = (posts) => posts.forEach((post, i) => {
+module.exports = (posts) => posts.forEach(post => {
   writeHtmlFile(`${postsDir}/${post.fileName}.html`, postTemplatePath, {
     title: post.title,
     body: post.body,
-    prev: posts[i-1] ? insertHtmlData(prevTemplatePath, { url: `/posts/${posts[i-1].fileName}`, text: posts[i-1].title }) : '',
-    next: posts[i+1] ? insertHtmlData(nextTemplatePath, { url: `/posts/${posts[i+1].fileName}`, text: posts[i+1].title }) : ''
+    prev: post.prev ? insertHtmlData(prevTemplatePath, { url: `/posts/${post.prev.fileName}`, text: post.prev.title }) : '',
+    next: post.next ? insertHtmlData(nextTemplatePath, { url: `/posts/${post.next.fileName}`, text: post.next.title }) : ''
   })
 })

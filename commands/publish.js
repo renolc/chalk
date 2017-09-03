@@ -1,6 +1,8 @@
 const { git } = require('cmd-executor')
 
+const readOrder = require('../utils/read-order')
 const getPostsData = require('../utils/get-posts-data')
+const getPostsInOrder = require('../utils/get-posts-in-order')
 const writePosts = require('../utils/write-posts')
 const writeIndex = require('../utils/write-index')
 const updateRss = require('../utils/update-rss')
@@ -10,10 +12,12 @@ const log = console.log
 module.exports = async () => {
   await git.pull()
 
-  const posts = getPostsData()
+  const order = readOrder()
+  const posts = getPostsData(order)
+  const postsInOrder = getPostsInOrder(posts, order)
   writePosts(posts)
-  writeIndex(posts)
-  updateRss(posts)
+  writeIndex(postsInOrder)
+  updateRss(postsInOrder)
 
   try {
     await git.add('.')

@@ -87,6 +87,8 @@ By default, all template files will use `style.css` for styling. Alter this file
 
 `order.json` is an array of post titles. `chalk new` will automatically insert new posts at the end of the array. If you ever desire to alter the order of your posts, simply adjust the ordering in `order.json` and `chalk publish`.
 
+If you would like a post to be outside of the linked chain of posts (such as an About page you want to link in the page header/footer), remove the entry from `order.json`. `chalk publish` will still detect and compile the `md` file, it just won't link to any "previous" or "next" posts.
+
 #### `/meta/rss.json`
 
 RSS is automatically generated for you during `chalk publish`. You can edit `rss.json` to provide a title, description, and urls for your feed.

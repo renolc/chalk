@@ -11,7 +11,7 @@ const {
 const postsPerPage = 5
 
 module.exports = (posts) => {
-  const items = posts.map((post, i) => insertHtmlData(itemTemplatePath, {
+  const items = posts.map(post => insertHtmlData(itemTemplatePath, {
     fileName: post.fileName,
     title: post.title,
     date: post.date,
